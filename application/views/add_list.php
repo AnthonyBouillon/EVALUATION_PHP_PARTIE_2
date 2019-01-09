@@ -1,7 +1,11 @@
 <div class="container content pt-4">
     <h1 class="text-center">Ajouter un produit</h1>
     <hr>
+    <?php
+    if(!empty(validation_errors())){
+    ?>
     <div class="alert alert-danger"><?= validation_errors(); ?></div>
+    <?php } ?>
     <form method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="pro_cat_id">Catégorie</label>

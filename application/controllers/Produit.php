@@ -26,14 +26,14 @@ class Produit extends CI_Controller {
         if ($this->input->post()) {
             
             // Délaration des règles de validation pour les champs du formulaire
-            $this->form_validation->set_rules('pro_cat_id', 'Libellé', 'required|min_length[2]|max_length[200]|integer');
-            $this->form_validation->set_rules('pro_ref', 'Référence', 'required|min_length[2]|max_length[10]|is_unique[produits.pro_ref]|regex_match[/^[A-Za-z@-_]+$/]');
-            $this->form_validation->set_rules('pro_libelle', 'Libellé', 'required|min_length[2]|max_length[200]|alpha_numeric_spaces');
-            $this->form_validation->set_rules('pro_description', 'Description', 'required|min_length[2]|max_length[1000]|alpha_numeric_spaces');
-            $this->form_validation->set_rules('pro_prix', 'Prix', 'required|min_length[2]|max_length[200]|decimal');
-            $this->form_validation->set_rules('pro_stock', 'Stock', 'required|min_length[2]|max_length[200]|decimal');
-            $this->form_validation->set_rules('pro_couleur', 'Couleur', 'required|min_length[2]|max_length[30]|alpha');
-            $this->form_validation->set_rules('pro_bloque', 'Oui_Non', 'required');
+            $this->form_validation->set_rules('pro_cat_id', 'Libellé', 'required|min_length[1]|max_length[2]|integer|xss_clean');
+            $this->form_validation->set_rules('pro_ref', 'Référence', 'required|min_length[2]|max_length[10]|is_unique[produits.pro_ref]|alpha_numeric_spaces|xss_clean');
+            $this->form_validation->set_rules('pro_libelle', 'Libellé', 'required|min_length[2]|max_length[200]|alpha_numeric_spaces|xss_clean');
+            $this->form_validation->set_rules('pro_description', 'Description', 'required|min_length[2]|max_length[1000]|alpha_numeric_spaces|xss_clean');
+            $this->form_validation->set_rules('pro_prix', 'Prix', 'required|min_length[2]|max_length[200]|numeric|xss_clean');
+            $this->form_validation->set_rules('pro_stock', 'Stock', 'required|min_length[2]|max_length[200]|integer|xss_clean');
+            $this->form_validation->set_rules('pro_couleur', 'Couleur', 'required|min_length[2]|max_length[30]|alpha|xss_clean');
+            $this->form_validation->set_rules('pro_bloque', 'Oui_Non', 'required|xss_clean');
             // Si les vérifications des champs est correct
             if ($this->form_validation->run()) {
                 // Je récupère les données
