@@ -1,0 +1,41 @@
+<div class="container content pt-4">
+    <h1 class="text-center">Liste des produits (partie administrateur)</h1>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Référence</th>
+                <th>Libellé</th>
+                <th>Description</th>
+                <th>Gestion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($list as $row) { ?>
+                <tr>
+                    <td>
+                        <?= $row->pro_id ?>
+                    </td>
+                    <td>
+                        <?= $row->pro_ref; ?>
+                    </td>
+                    <td>
+                        <?= $row->pro_libelle; ?>
+                    </td>
+                    <td>
+                        <?= $row->pro_description; ?>
+                    </td>
+                    <td>
+                        <a href="<?= site_url('produit/update_list/' . $row->pro_id) ?>" title="Modifier" class="btn btn-primary btn_list">Modifier</a><br>
+                        <form method="POST">
+                            <button type="submit" class="btn btn-danger btn_list">Supprimer</button>
+                        </form>  
+                    </td>
+                <tr>
+                <?php } ?>
+        </tbody>
+    </table>
+
+</div>
+

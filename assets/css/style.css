@@ -1,0 +1,32 @@
+
+
+.btn_list{
+    width: 150px;
+}
+
+.navbar{
+    background-color: #090906;
+}
+nav a{
+    color: #00943F;
+}
+nav li a{
+    color: #E7CDAF;
+}
+nav li a:hover{
+    color: #00943F;
+}
+body{
+    background-color: #BAB981;
+    margin:0;padding:0;
+}
+.content{
+    background-color: white;
+}
+
+.banner{
+    max-height: 300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
