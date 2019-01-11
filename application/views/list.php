@@ -29,7 +29,8 @@
                     <td>
                         <a href="<?= site_url('produit/update_list/' . $row->pro_id) ?>" title="Modifier" class="btn btn-primary btn_list">Modifier</a><br>
                         <form method="POST">
-                            <button type="submit" class="btn btn-danger btn_list">Supprimer</button>
+                            <input type="hidden" name="pro_id" value="<?= $row->pro_id ?>">
+                            <button type="submit" class="btn btn-danger btn_list" onclick="return confirm('Voulez vous vraiment supprimer ce produit ?')">Supprimer</button>
                         </form>  
                     </td>
                 <tr>

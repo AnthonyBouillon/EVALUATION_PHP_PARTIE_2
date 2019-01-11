@@ -5,6 +5,10 @@
     if(!empty(validation_errors())){
     ?>
     <div class="alert alert-danger"><?= validation_errors(); ?></div>
+    
+    <?php }
+    if($this->session->flashdata('success')){ ?>
+    <div class="alert alert-success"><?= $this->session->flashdata('success') ?></div>
     <?php } ?>
     <form method="POST" enctype="multipart/form-data">
         <div class="form-group">
@@ -17,27 +21,27 @@
         </div>
         <div class="form-group">
             <label for="pro_ref">Référence</label>
-            <input type="text" name="pro_ref" class="form-control" id="pro_ref" placeholder="Entrer référence">
+            <input type="text" name="pro_ref" class="form-control" id="pro_ref" placeholder="Entrer référence" value="<?= set_value('pro_ref') ?>">
         </div>
         <div class="form-group">
             <label for="pro_libelle">Libellé</label>
-            <input type="text" name="pro_libelle" class="form-control" id="pro_libelle" placeholder="Entrer libellé">
+            <input type="text" name="pro_libelle" class="form-control" id="pro_libelle" placeholder="Entrer libellé" value="<?= set_value('pro_libelle') ?>">
         </div>
         <div class="form-group">
             <label for="pro_description">Description</label>
-            <input type="text" name="pro_description" class="form-control" id="pro_description" placeholder="Entrer description">
+            <input type="text" name="pro_description" class="form-control" id="pro_description" placeholder="Entrer description" value="<?= set_value('pro_description') ?>">
         </div>
         <div class="form-group">
             <label for="pro_prix">Prix</label>
-            <input type="text" name="pro_prix" class="form-control" id="pro_prix" placeholder="Entrer prix">
+            <input type="text" name="pro_prix" class="form-control" id="pro_prix" placeholder="Entrer prix" value="<?= set_value('pro_prix') ?>">
         </div>
         <div class="form-group">
             <label for="pro_stock">Stock</label>
-            <input type="text" name="pro_stock" class="form-control" id="pro_stock" placeholder="Entrer stock">
+            <input type="text" name="pro_stock" class="form-control" id="pro_stock" placeholder="Entrer stock" value="<?= set_value('pro_stock') ?>">
         </div>
         <div class="form-group">
             <label for="pro_couleur">Couleur</label>
-            <input type="text" name="pro_couleur" class="form-control" id="pro_couleur"  placeholder="Entrer couleur">
+            <input type="text" name="pro_couleur" class="form-control" id="pro_couleur"  placeholder="Entrer couleur" value="<?= set_value('pro_couleur') ?>">
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="pro_photo" name="pro_photo">
