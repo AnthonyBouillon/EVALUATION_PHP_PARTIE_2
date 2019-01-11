@@ -1,16 +1,24 @@
 <div class="container content pt-4">
     <h1 class="text-center">Modifier un produit</h1>
     <hr>
+    <?php
+    if (!empty(validation_errors())) {
+        ?>
+        <div class="alert alert-danger"><?= validation_errors(); ?></div>
 
+    <?php }
+    if ($this->session->flashdata('success')) {
+        ?>
+        <div class="alert alert-success"><?= $this->session->flashdata('success') ?></div>
+<?php } ?>
     <form method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="pro_cat_id">Catégorie</label>
             <select class="form-control" id="pro_cat_id" name="pro_cat_id">
                 <option value="<?= $this_product->pro_cat_id ?>"><?= $this_product->cat_nom ?></option>
-                <?php
-                foreach($this_cat as $row){ ?>
+                <?php foreach ($this_cat as $row) { ?>
                     <option value="<?= $row->cat_id ?>"><?= $row->cat_nom ?></option>
-               <?php } ?>
+                <?php } ?>
             </select>
         </div>
         <div class="form-group">
@@ -42,12 +50,12 @@
             <div class="card-body">
                 <p class="card-text">Si vous voulez remplacer l'image, choisissez-en une nouvelle !</p>
             </div>
-             <div class="custom-file">
-            <input type="file" class="custom-file-input" id="pro_photo" name="pro_photo">
-            <label class="custom-file-label" for="pro_photo">Parcourir image...</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="pro_photo" name="pro_photo">
+                <label class="custom-file-label" for="pro_photo">Parcourir image...</label>
+            </div>
         </div>
-        </div>
-       
+
         <hr>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="pro_bloque" id="pro_bloque" value="0" checked>
