@@ -1,3 +1,6 @@
+<?php
+//session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -11,14 +14,12 @@
     <body>
         <div class="container-fluid">
             <header class="row block-header">
-             
                     <div class="col-2">
                         <img src="<?= base_url('assets/image/logo.png') ?>" alt="Logo du site" class="img-fluid logo">
                     </div>
                     <div class="col-10">
                         <img src="<?= base_url('assets/image/banner_1.jpg') ?>" alt="Logo du site" class="img-fluid banner">
                     </div>
-               
             </header>
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#">Jarditou</a>
@@ -29,10 +30,22 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="<?= site_url('produit/show_list') ?>">Liste des produits (Administrateur)</a>
+                                <a class="nav-link" href="<?= site_url('produit/read_list') ?>">Liste des produits (Administrateur)</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= site_url('produit/add_list') ?>">Ajouter un produit (Administrateur)</a>
+                                <a class="nav-link" href="<?= site_url('produit/insert_list') ?>">Ajouter un produit (Administrateur)</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="<?= site_url('boutique/read_list') ?>">Liste des produits (Utilisateur)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= site_url('boutique/read_cart') ?>">Panier (Utilisateur)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= site_url('user/register') ?>">Inscription</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= site_url('user/login') ?>">Connexion</a>
                             </li>
                         </ul>
                     </div>

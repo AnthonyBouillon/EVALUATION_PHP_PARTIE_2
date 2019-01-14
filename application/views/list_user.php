@@ -1,36 +1,37 @@
+
 <div class="container content pt-4 pb-4">
-    <h1 class="text-center">Liste des produits (partie administrateur)</h1>
+    <h1 class="text-center">Liste des produits (partie utilisateur)</h1>
     <hr>
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Référence</th>
-                <th>Libellé</th>
                 <th>Description</th>
-                <th>Gestion</th>
+                <th>Photo</th>
+                <th>Prix</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($list as $row) { ?>
                 <tr>
                     <td>
-                        <?= $row->pro_id ?>
-                    </td>
-                    <td>
-                        <?= $row->pro_ref; ?>
-                    </td>
-                    <td>
-                        <?= $row->pro_libelle; ?>
+                        <?= $row->pro_ref ?>
                     </td>
                     <td>
                         <?= $row->pro_description; ?>
                     </td>
                     <td>
-                        <a href="<?= site_url('produit/update_list/' . $row->pro_id) ?>" title="Modifier" class="btn btn-primary btn_list">Modifier</a><br>
+                        <img class="card-img-top img-fluid" src="<?= base_url('assets/image/' . $row->pro_id . '.' . $row->pro_photo) ?>" alt="Card image cap">
+
+                    </td>
+                    <td>
+                        <?= $row->pro_prix; ?>
+                    </td>
+                    <td>
                         <form method="POST">
+                            <input type="number" class="form-control" name="quantity" value="1">
                             <input type="hidden" name="pro_id" value="<?= $row->pro_id ?>">
-                            <button type="submit" class="btn btn-danger btn_list" onclick="return confirm('Voulez vous vraiment supprimer ce produit ?')">Supprimer</button>
+                            <button type="submit" class="btn btn-primary btn_list" >Ajouter</button>  
                         </form>  
                     </td>
                 <tr>
