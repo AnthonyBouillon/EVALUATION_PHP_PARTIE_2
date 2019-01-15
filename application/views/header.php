@@ -41,12 +41,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= site_url('boutique/read_cart') ?>">Panier (Utilisateur)</a>
                             </li>
+                            <?php if(!isset($_SESSION['username'])){ ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= site_url('user/register') ?>">Inscription</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= site_url('user/login') ?>">Connexion</a>
                             </li>
+                            <?php }else{  ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= site_url('boutique/read_list') ?>"><?= $_SESSION['username'] ?></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= site_url('user/logout') ?>">Déconnexion</a>
+                            </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>

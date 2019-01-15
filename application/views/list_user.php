@@ -24,7 +24,7 @@
                         <img class="card-img-top img-fluid" src="<?= base_url('assets/image/' . $row->pro_id . '.' . $row->pro_photo) ?>" alt="Card image cap">
 
                     </td>
-                    <td>
+                    <td><?php $_SESSION['prix'] = $row->pro_prix ?>
                         <?= $row->pro_prix; ?>
                     </td>
                     <td>

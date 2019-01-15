@@ -1,9 +1,9 @@
 <div class="container content pt-4 pb-4">
     <h1 class="text-center">Connexion</h1>
     <br>
-    <?php if(!empty(validation_errors())){ ?>
+    <?php if (!empty(validation_errors())) { ?>
         <?= '<div class="alert alert-danger">' . validation_errors() . '</div>' ?>
-        <?php } ?>
+    <?php } ?>
     <small class="text-success"><?= !empty($success) ? $success : '' ?></small>
     <small class="text-danger"><?= !empty($fail) ? $fail : '' ?></small>
     <hr>

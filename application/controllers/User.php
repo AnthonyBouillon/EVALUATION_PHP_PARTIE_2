@@ -22,6 +22,9 @@ class User extends CI_Controller {
                 'u_password' => $password_hash
             );
             if ($this->form_validation->run()) {
+                if (!empty($_SESSION['username'])) {
+                    $data['id_tmp'] = $_SESSION['id_tmp'];
+                }
                 $this->user_model->create_user($data);
             }
         }
@@ -41,8 +44,9 @@ class User extends CI_Controller {
                 if ($result == true) {
                     if (password_verify($_POST['u_password'], $result->u_password)) {
                         $msg['success'] = 'Bravo';
-                        $_SESSION['login'] = $_POST['u_login'];
+                        $_SESSION['username'] = $_POST['u_login'];
                         $_SESSION['id_user'] = $result->u_id;
+                        
                     } else {
                         $msg['fail'] = 'Mauvais mot de passe';
                     }
@@ -54,6 +58,13 @@ class User extends CI_Controller {
         $title['title'] = 'Connexion';
         $this->load->view('header', $title);
         $this->load->view('login', $msg);
+        $this->load->view('footer');
+    }
+
+    public function logout() {
+        $title['title'] = 'Déconnexion';
+        $this->load->view('header', $title);
+        $this->load->view('logout');
         $this->load->view('footer');
     }
 
