@@ -1,4 +1,4 @@
-<div class="container content pt-4 pb-4">
+
     <h1 class="text-center">Modifier un produit</h1>
     <hr>
     <?php
@@ -70,4 +70,4 @@
         <hr>
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
-</div>
+

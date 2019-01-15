@@ -1,20 +1,23 @@
-<div class="container content pt-4 pb-4">
+
     <h1 class="text-center">Votre panier (partie utilisateur)</h1>
     <form method="POST">
         <input type="submit" value="Supprimer mon panier" class="btn btn-danger" name="delete_submit" onclick="return confirm('Voulez vous supprimer votre panier ?')">
     </form>
     <hr>
-    <table class="table">
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th>Référence</th>
                 <th>Photo</th>
                 <th>Quantité</th>
                 <th>Prix</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($cart_user as $row) { ?>
+            <?php 
+            if(!empty($cart_user)){
+            foreach ($cart_user as $row) { ?>
                 <tr>
                     <td>
                         <?= $row->pro_libelle ?>
@@ -33,19 +36,24 @@
                         </form>
                     </td>
                     <td>
-                        <?php $price = $row->prix * $row->quantity ?>
-                        <?= $price ?>
+                        <?= $row->price ?>
+                    </td>
+                    <td>
+                        <form method="POST">
+                            <input type="hidden" name="id_product" value="<?= $row->id_product ?>">
+                            <input type="submit" name="delete_product" value="Supprimer" class="btn btn-danger">
+                        </form>
                     </td>
 
                 <tr>
-                <?php } ?>
+            <?php }  ?>
         </tbody>
     </table>
     <p><b>Prix final, toutes taxes comprises</b></p>
     <p>
          <?php foreach ($ttc as $row) { ?>
         <?= $row->ttc ?>
-         <?php } ?>
+            <?php }  ?>
     </p>
     <form method="POST">
         <input type="submit" name="buy_submit" value="Acheter" class="btn btn-success">
@@ -54,8 +62,7 @@
             echo 'Vous devez être connecté';
         }else if(isset($_POST['buy_submit']) && !empty($_SESSION['username'])){
             echo 'Donne moi ta carte bancaire et c\'est réglé';
-        }
+            } }
         ?>
     </form>
 
-</div>
