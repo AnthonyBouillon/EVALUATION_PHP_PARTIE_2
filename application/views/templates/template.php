@@ -1,4 +1,15 @@
 
+<?php
+// Récupère en tete du langage du navigateur
+$language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+// Récupère les deux premières lettres
+$language = $language{0} . $language{1};
+if ($language == "fr") {
+    $this->lang->load('fr', 'french');
+} else {
+    $this->lang->load('en', 'english');
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -29,13 +40,15 @@
                 <div class="container">
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
-                            <!-- Faire un accès administrateur -->
-                            <li class="nav-item active">
-                                <a class="nav-link" href="<?= site_url('produit/read_list') ?>">Liste des produits (Administrateur)</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= site_url('produit/insert_list') ?>">Ajouter un produit (Administrateur)</a>
-                            </li>
+                            <?php if ($this->session->admin == 1): ?>
+                                <!-- Faire un accès administrateur -->
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="<?= site_url('produit/read_list') ?>">Liste des produits (Administrateur)</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= site_url('produit/insert_list') ?>">Ajouter un produit (Administrateur)</a>
+                                </li>
+                            <?php endif; ?>
                             <!-- Public -->
                             <li class="nav-item active">
                                 <a class="nav-link" href="<?= site_url('boutique/read_list') ?>">Liste des produits (Utilisateur)</a>
@@ -44,7 +57,7 @@
                                 <a class="nav-link" href="<?= site_url('boutique/read_cart') ?>">Panier (Utilisateur)</a>
                             </li>
                             <!-- Si l'utilisateur n'est pas connecté -->
-                            <?php if (!isset($_SESSION['username'])) { ?>
+                            <?php if (!isset($this->session->username)) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('user/register') ?>">Inscription</a>
                                 </li>
@@ -54,7 +67,7 @@
                                 <!-- Si l'utilisateur est connecté -->
                             <?php } else { ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= site_url('boutique/read_list') ?>"><?= $_SESSION['username'] ?></a>
+                                    <a class="nav-link" href="<?= site_url('boutique/read_list') ?>"><?= $this->session->username ?></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('user/logout') ?>">Déconnexion</a>
@@ -66,3 +79,18 @@
             </nav>
         </div>
         <div class="container content pt-4 mb-4 pb-4">
+            <?php $this->load->view($page); ?>
+        </div>
+        <div class="container-fluid">
+            <footer>
+                <img src="<?= base_url('assets/image/img_footer.png') ?>" class="img-fluid" alt="Image">
+            </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    </body>
+</html>
+
+

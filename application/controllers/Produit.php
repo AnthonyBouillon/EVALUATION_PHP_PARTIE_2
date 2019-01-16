@@ -10,16 +10,35 @@ class Produit extends CI_Controller {
      * appelle la méthode qui supprime un produit
      * et retourne les vues
      */
-    public function read_list() {
+    public function read_list($test =! null) {
+        if($this->session->admin != 1){
+            header('location: ../boutique/read_list');
+        }
         if ($this->input->post()) {
             $id = $this->input->post('pro_id');
             $this->produit_model->delete_product($id);
         }
-        $title['title'] = 'Liste des produits';
-        $data['list'] = $this->produit_model->read_products();
-        $this->load->view('header', $title);
-        $this->load->view('list', $data);
-        $this->load->view('footer');
+                // Pagination test
+        $this->load->library('pagination');
+        $config['base_url'] = 'http://localhost/Jarditou/index.php/produit/read_list';
+        $config['total_rows'] = $this->db->get('produits')->num_rows();
+        $config['per_page'] = 5;
+     
+           $config['next_link'] = ' Page suivante';
+           $config['first_link'] = '';
+  $config['prev_link'] = 'Page précédente ';
+  $config['last_link'] = '';
+         $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        $data['title'] = 'Liste des produits';
+         // Affiche tous les produits
+        if(empty($test)){
+            $test = 1;
+        }
+        // Nom de la page
+        $data['page'] = 'list';
+        $data['list'] = $this->produit_model->read_products(5, $test);
+        $this->load->view('templates/template', $data);
     }
 
     /**
@@ -29,6 +48,9 @@ class Produit extends CI_Controller {
      * insertion d'une nouvelle image dans un dossier 
      */
     public function insert_list() {
+        if($this->session->admin != 1){
+            header('location: ../boutique/read_list');
+        }
         if ($this->input->post()) {
             // Vérification de chaques champs
             $this->form_validation->set_rules('pro_cat_id', 'Libellé', 'required|min_length[1]|max_length[2]|integer|xss_clean');
@@ -51,7 +73,7 @@ class Produit extends CI_Controller {
                 // J'appelle ma méthode qui permet d'insérer une ligne dans la bdd
                 $this->produit_model->create_product($data);
                 // Message de succès
-                $this->session->set_flashdata('success', 'Bravo, le produit a été ajouté');
+                $this->session->set_flashdata('success_add', 'Bravo, le produit a été ajouté');
                 // Récupère l'id du produit qui vient d'être inséré
                 $last_id = $this->db->insert_id();
                 // Vérification du fichier à télécharger
@@ -65,11 +87,12 @@ class Produit extends CI_Controller {
                 $this->upload->do_upload('pro_photo');
             }
         }
+        
+        $data['title'] = 'Ajouter un produit';
+        // Nom de la page
+        $data['page'] = 'add_list';
         $data['data_cat'] = $this->produit_model->read_categorie();
-        $title['title'] = 'Ajouter un produit';
-        $this->load->view('header', $title);
-        $this->load->view('add_list', $data);
-        $this->load->view('footer');
+        $this->load->view('templates/template', $data);
     }
 
     /**
@@ -77,6 +100,9 @@ class Produit extends CI_Controller {
      * @param type $id
      */
     public function update_list($id) {
+        if($this->session->admin != 1){
+            header('location: ../boutique/read_list');
+        }
         if ($this->input->post()) {
             // Délaration des règles de validation pour les champs du formulaire
             $this->form_validation->set_rules('pro_cat_id', 'Libellé', 'required|min_length[1]|max_length[2]|integer|xss_clean');
@@ -112,13 +138,13 @@ class Produit extends CI_Controller {
                 $this->produit_model->update_product($id, $data);
                 $this->session->set_flashdata('success', 'Bravo, le produit a été modifié');
             }
-        }
-        $data['this_product'] = $this->produit_model->read_by_product($id);
+        }    
+        $data['title'] = 'Modifier un produit';
+        // Nom de la page
+        $data['page'] = 'update_list';
         $data['this_cat'] = $this->produit_model->read_categorie();
-        $title['title'] = 'Modifier un produit';
-        $this->load->view('header', $title);
-        $this->load->view('update_list', $data);
-        $this->load->view('footer');
+        $data['this_product'] = $this->produit_model->read_by_product($id);
+        $this->load->view('templates/template', $data);
     }
 
 }

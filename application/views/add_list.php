@@ -3,17 +3,17 @@
 <!-- Affiche les erreurs lié aux règles des champs du formulaire -->
 <?php if (!empty(validation_errors())) { ?>
     <div class="alert alert-danger"><?= validation_errors(); ?></div>
-<?php } else if ($this->session->flashdata('success')) { ?>
-    <div class="alert alert-success"><?= $this->session->flashdata('success') ?></div>
+<?php } else if ($this->session->flashdata('success_add')) { ?>
+    <div class="alert alert-success"><?= $this->session->flashdata('success_add') ?></div>
 <?php } ?>
 <form method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="pro_cat_id">Catégorie</label>
         <!-- Noms des catégories -->
         <select class="form-control" id="pro_cat_id" name="pro_cat_id">
-            <?php foreach ($data_cat as $row) { ?>
+            <?php foreach ($data_cat as $row) : ?>
                 <option value="<?= $row->cat_id ?>"><?= $row->cat_nom ?></option>
-            <?php } ?>
+            <?php endforeach; ?>
         </select>
     </div>
     <div class="form-group">

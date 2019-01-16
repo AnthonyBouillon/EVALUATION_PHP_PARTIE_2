@@ -9,9 +9,9 @@ class Produit_model extends CI_Model {
         $this->db->insert('produits', $data);
     }
 
-    public function read_products() {
+    public function read_products($per_page, $page) {
         // Lis toutes les lignes de la table produits
-        $result = $this->db->get('produits')->result();
+        $result = $this->db->get('produits', intval($per_page), (intval($page)-1) * $per_page)->result();
         return $result;
     }
 

@@ -36,10 +36,10 @@ class User extends CI_Controller {
             }
         }
         // Vues
-        $title['title'] = 'Inscription';
-        $this->load->view('header', $title);
-        $this->load->view('register');
-        $this->load->view('footer');
+        $data['title'] = 'Inscription';
+        // Nom de la page
+        $data['page'] = 'register';
+        $this->load->view('templates/template', $data);
     }
 
     /**
@@ -61,6 +61,7 @@ class User extends CI_Controller {
                         $this->session->set_flashdata('success', 'Vous êtes connectez !');
                         $this->session->username = $this->input->post('u_login');
                         $this->session->id_user = $result->u_id;
+                        $this->session->admin = $result->admin;
                     } else {
                         $this->session->set_flashdata('fail', 'Mauvais identifiant');
                     }
@@ -70,20 +71,20 @@ class User extends CI_Controller {
             }
         }
         // Vues
-        $title['title'] = 'Connexion';
-        $this->load->view('header', $title);
-        $this->load->view('login');
-        $this->load->view('footer');
+        $data['title'] = 'Connexion';
+        // Nom de la page
+        $data['page'] = 'login';
+        $this->load->view('templates/template', $data);
     }
 
     /**
      * Déconnexion
      */
     public function logout() {
-        $title['title'] = 'Déconnexion';
-        $this->load->view('header', $title);
-        $this->load->view('logout');
-        $this->load->view('footer');
+        $data['title'] = 'Déconnexion';
+        // Nom de la page
+        $data['page'] = 'logout';
+        $this->load->view('templates/template', $data);
     }
 
 }

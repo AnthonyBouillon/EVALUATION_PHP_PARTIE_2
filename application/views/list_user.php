@@ -3,16 +3,17 @@
 <table class="table table-responsive">
     <thead>
         <tr>
-            <th>Référence</th>
-            <th>Description</th>
-            <th>Photo</th>
-            <th>Prix</th>
+            <th><?= lang('reference') ?></th>
+            <th><?= lang('description') ?></th>
+            <th><?= lang('picture') ?></th>
+            <th><?= lang('price') ?></th>
+            <th><?= lang('gestion') ?></th>
         </tr>
     </thead>
     <tbody>
         <?php 
         if(!empty($list)){
-        foreach ($list as $row) { ?>
+        foreach ($list as $row) : ?>
             <tr>
                 <td>
                     <?= $row->pro_ref ?>
@@ -35,8 +36,9 @@
                     </form>  
                 </td>
             <tr>
-        <?php } } ?>
+        <?php endforeach; } ?>
     </tbody>
 </table>
+<?php echo $this->pagination->create_links(); ?>
 
 

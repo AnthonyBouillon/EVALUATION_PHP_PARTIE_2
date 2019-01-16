@@ -13,7 +13,7 @@
     <tbody>
         <?php 
         if(!empty($list)){
-        foreach ($list as $row) { 
+        foreach ($list as $row) : 
         ?>
             <tr>
                 <td>
@@ -36,7 +36,7 @@
                     </form>  
                 </td>
             <tr>
-        <?php } } ?>
+        <?php endforeach; } ?>
     </tbody>
 </table>
-
+<?php echo $this->pagination->create_links(); ?>
