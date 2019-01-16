@@ -86,5 +86,11 @@ class User extends CI_Controller {
         $data['page'] = 'logout';
         $this->load->view('templates/template', $data);
     }
+    public function error_page(){
+         $data['title'] = 'ERROR 404';
+        // Nom de la page
+        $data['page'] = '404';
+        $this->load->view('templates/template', $data);
+    }
 
 }

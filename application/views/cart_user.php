@@ -1,9 +1,5 @@
 
     <h1 class="text-center">Votre panier (partie utilisateur)</h1>
-    <?php 
-    echo $this->session->id_tmp;
-    echo $this->session->username;
-    ?>
     <hr>
     <form method="POST">
         <input type="submit" value="Supprimer mon panier" class="btn btn-danger" name="delete_submit" onclick="return confirm('Voulez vous supprimer votre panier ?')">
