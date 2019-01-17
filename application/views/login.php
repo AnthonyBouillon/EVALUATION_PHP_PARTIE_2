@@ -21,5 +21,5 @@
             <input type="password" name="u_password" class="form-control" id="u_password" placeholder="Mot de passe" pattern="[A-Za-z-àáâäçèéêëìíîïñòóôöùúûü -]{1,255}" required value="<?= !empty($_POST['u_password']) ? $_POST['u_password'] : '' ?>">
         </div>
     </div>
-    <button type="submit" name="submit_register" class="btn btn-primary" id="submit">M'enregistrer</button>
+    <button type="submit" name="submit_login" class="btn btn-primary" id="submit"> M'enregistrer</button>
 </form>

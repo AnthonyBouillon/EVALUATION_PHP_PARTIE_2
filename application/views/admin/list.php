@@ -1,5 +1,10 @@
 <h1 class="text-center">Liste des produits (partie administrateur)</h1>
 <hr>
+<?php
+if($this->session->flashdata('succes_delete')){
+    echo '<div class="alert alert-success">' . $this->session->flashdata('succes_delete') . '</div>';
+}
+ ?>
 <table class="table table-responsive">
     <thead>
         <tr>
@@ -29,7 +34,7 @@
                     <?= $row->pro_description; ?>
                 </td>
                 <td>
-                    <a href="<?= site_url('produit/update_list/' . $row->pro_id) ?>" title="Modifier" class="btn btn-primary btn_list">Modifier</a><br>
+                    <a href="<?= site_url('admin/produit/update_list/' . $row->pro_id) ?>" title="Modifier" class="btn btn-primary btn_list">Modifier</a><br>
                     <form method="POST">
                         <input type="hidden" name="pro_id" value="<?= $row->pro_id ?>">
                         <button type="submit" class="btn btn-danger btn_list" onclick="return confirm('Voulez vous vraiment supprimer ce produit ?')">Supprimer</button>

@@ -1,5 +1,12 @@
 
 <?php
+// Assigne un id unique pour les non connectés
+if (!isset($this->session->id_tmp)) {
+    $this->session->id_tmp = uniqid();
+    // Annule l'id temporaire pour les connectés
+} else if (isset($this->session->username) && !isset($this->session->id_tmp)) {
+    $this->session->id_tmp = 0;
+}
 // Récupère en tete du langage du navigateur
 $language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 // Récupère les deux premières lettres
@@ -43,10 +50,10 @@ if ($language == "fr") {
                             <?php if ($this->session->admin == 1): ?>
                                 <!-- Faire un accès administrateur -->
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="<?= site_url('produit/read_list') ?>">Liste des produits (Administrateur)</a>
+                                    <a class="nav-link" href="<?= site_url('admin/produit/read_list') ?>">Liste des produits (Administrateur)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= site_url('produit/insert_list') ?>">Ajouter un produit (Administrateur)</a>
+                                    <a class="nav-link" href="<?= site_url('admin/produit/insert_list') ?>">Ajouter un produit (Administrateur)</a>
                                 </li>
                             <?php endif; ?>
                             <!-- Public -->
@@ -89,7 +96,7 @@ if ($language == "fr") {
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
+        <script src="<?= base_url('assets/js/script.js') ?>"></script>
     </body>
 </html>
 

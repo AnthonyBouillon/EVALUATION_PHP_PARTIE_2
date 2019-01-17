@@ -38,3 +38,7 @@ body{
 .navbar-toggler-icon{
     background-color: #E7CDAF;
 }
+.c_red{
+    color: red;
+    font-weight: bold;
+}

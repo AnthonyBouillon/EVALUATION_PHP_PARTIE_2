@@ -4,19 +4,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Produit_model extends CI_Model {
 
+    /**
+     * Enregistre un produit
+     * @param type $data
+     */
     public function create_product($data) {
-        // Insert un produit in bdd      
         $this->db->insert('produits', $data);
     }
 
+    /**
+     * Lis les produits (pagination)
+     * @param type $per_page
+     * @param type $page
+     * @return type
+     */
     public function read_products($per_page, $page) {
-        // Lis toutes les lignes de la table produits
-        $result = $this->db->get('produits', intval($per_page), (intval($page)-1) * $per_page)->result();
+        $result = $this->db->get('produits', intval($per_page), (intval($page) - 1) * $per_page)->result();
         return $result;
     }
 
+    /**
+     * Lis un produit
+     * @param type $id
+     * @return type
+     */
     public function read_by_product($id) {
-        // Lis les informations d'un produit
         $this->db->select('*')
                 ->from('produits')
                 ->join('categories', 'categories.cat_id = produits.pro_cat_id')
@@ -25,20 +37,30 @@ class Produit_model extends CI_Model {
         return $result;
     }
 
+    /**
+     * Lis les catégories
+     * @return type
+     */
     public function read_categorie() {
-        // Lis toutes les lignes de la table categories
         $result = $this->db->get('categories')->result();
         return $result;
     }
 
+    /**
+     * Modifie un produit
+     * @param type $id
+     * @param type $data
+     */
     public function update_product($id, $data) {
-        // Modifie le produit sélectionnée
         $this->db->where('pro_id', $id);
         $this->db->update('produits', $data);
     }
 
+    /**
+     * Supprime un ou des produits
+     * @param type $id
+     */
     public function delete_product($id) {
-        // Supprime produit in bdd
         $this->db->where('pro_id', $id);
         $this->db->delete('produits');
         // Supprime image in dossier

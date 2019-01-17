@@ -5,7 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
 
     /**
-     * Inscription
+     * Vérification des champs
+     * chiffrage du mot de passe
+     * appelle de la méthode d'insertion de l'utilisateur provenant du model
      */
     public function register() {
         if ($this->input->post()) {
@@ -19,6 +21,7 @@ class User extends CI_Controller {
             if ($this->form_validation->run()) {
                 // Mot de passe chiffré
                 $password_hash = password_hash($this->input->post('u_password'), PASSWORD_DEFAULT);
+                // Récupèration des données du formulaire
                 $data = array(
                     'u_name' => $this->input->post('u_name'),
                     'u_firstname' => $this->input->post('u_firstname'),
@@ -43,7 +46,9 @@ class User extends CI_Controller {
     }
 
     /**
-     * Connexion
+     * Vérification des champs
+     * Vérification du mot de passe correspondant à sont nom d'utilisateur
+     * Assignation des données de l'utilisateur aux sessions
      */
     public function login() {
         // Vérifie qu'il y a bien des valeurs à récupèrer
@@ -82,13 +87,14 @@ class User extends CI_Controller {
      */
     public function logout() {
         $data['title'] = 'Déconnexion';
-        // Nom de la page
         $data['page'] = 'logout';
         $this->load->view('templates/template', $data);
     }
+    /**
+     * Page 404
+     */
     public function error_page(){
          $data['title'] = 'ERROR 404';
-        // Nom de la page
         $data['page'] = '404';
         $this->load->view('templates/template', $data);
     }
