@@ -29,10 +29,10 @@
                 </td>
                 <td>
                     <!-- Ajoute un produit avec sa quantité -->
-                    <form method="POST">
+                    <form method="POST" action="<?php echo current_url(); ?>" class="form">
                         <input type="number" class="form-control" name="quantity" value="1">
                         <input type="hidden" name="id_product" value="<?= $row->pro_id ?>">
-                        <button type="submit" class="btn btn-primary btn_list">Ajouter</button>  
+                        <button type="submit" class="btn btn-primary btn_list" id="submit_add">Ajouter</button>  
                     </form>  
                 </td>
             <tr>

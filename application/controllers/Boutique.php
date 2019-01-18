@@ -24,7 +24,7 @@ class Boutique extends CI_Controller {
                     // Insert son identifiant
                     $data['id_user'] = $this->session->id_user;
                 }
-                // L'utilisateur est insérer
+                // Le produit est inséré
                 $this->boutique_model->create_cart($data, $this->input->post('id_product'));
             }
         }
@@ -50,8 +50,10 @@ class Boutique extends CI_Controller {
             $id_url = 1;
         }
         $data['list'] = $this->boutique_model->read_list(5, $id_url);
+       
         // Vues
         $this->load->view('templates/template', $data);
+          
     }
 
     /**
