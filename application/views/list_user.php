@@ -11,32 +11,34 @@
         </tr>
     </thead>
     <tbody>
-        <?php 
-        if(!empty($list)){
-        foreach ($list as $row) : ?>
-            <tr>
-                <td>
-                    <?= $row->pro_ref ?>
-                </td>
-                <td>
-                    <?= $row->pro_description; ?>
-                </td>
-                <td>
-                    <img class="card-img-top img-fluid" src="<?= base_url('assets/image/' . $row->pro_id . '.' . $row->pro_photo) ?>" alt="Image">
-                </td>
-                <td>
-                    <?= $row->pro_prix; ?>
-                </td>
-                <td>
-                    <!-- Ajoute un produit avec sa quantité -->
-                    <form method="POST" action="<?php echo current_url(); ?>" class="form">
-                        <input type="number" class="form-control" name="quantity" value="1">
-                        <input type="hidden" name="id_product" value="<?= $row->pro_id ?>">
-                        <button type="submit" class="btn btn-primary btn_list" id="submit_add">Ajouter</button>  
-                    </form>  
-                </td>
-            <tr>
-        <?php endforeach; } ?>
+        <?php
+        if (!empty($list)) {
+            foreach ($list as $row) :
+                ?>
+                <tr>
+                    <td>
+        <?= $row->pro_ref ?>
+                    </td>
+                    <td>
+        <?= $row->pro_description; ?>
+                    </td>
+                    <td>
+                        <img class="card-img-top img-fluid" src="<?= base_url('assets/image/' . $row->pro_id . '.' . $row->pro_photo) ?>" alt="Image">
+                    </td>
+                    <td>
+        <?= $row->pro_prix; ?>
+                    </td>
+                    <td>
+                        <!-- Ajoute un produit avec sa quantité -->
+                        <form method="POST" action="<?php echo current_url(); ?>" class="form">
+                            <input type="number" class="form-control" name="quantity" value="1">
+                            <input type="hidden" name="id_product" value="<?= $row->pro_id ?>">
+                            <button type="submit" class="btn btn-primary btn_list" id="submit_add">Ajouter</button>
+                        </form>  
+                    </td>
+                <tr>
+    <?php endforeach;
+} ?>
     </tbody>
 </table>
 <!-- Lien de la pagination -->

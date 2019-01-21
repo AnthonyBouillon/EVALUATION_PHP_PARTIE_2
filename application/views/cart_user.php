@@ -1,11 +1,11 @@
 
 <h1 class="text-center">Votre panier (partie utilisateur)</h1>
 <hr>
-<form method="POST">
-    <input type="submit" value="Supprimer mon panier" class="btn btn-danger" name="delete_submit" onclick="return confirm('Voulez vous supprimer votre panier ?')">
+<form method="POST" action="<?php echo current_url(); ?>" class="delete_all_cart">
+    <input type="submit" value="Supprimer mon panier" class="btn btn-danger" name="delete_submit" id="delete_all_submit" onclick="return confirm('Voulez vous supprimer votre panier ?')">
 </form>
 <hr>
-<table class="table table-responsive table-hover">
+<table class="table table-responsive table-hover table_cart">
     <thead>
         <tr>
             <th>Référence</th>
@@ -21,7 +21,7 @@
             foreach ($cart_user as $row) :
                 ?>
                 <tr>
-                    <td>
+                    <td>  
                         <?= $row->pro_libelle ?>
                     </td>
                     <td>
@@ -29,21 +29,22 @@
                     </td>
                     <td>
                         <?= $row->quantity ?>
-                        <form method="POST">
-                            <input type="hidden" name="id" value="<?= $row->id ?>">
-                            <input type="hidden" name="id_tmp" value="<?= $this->session->id_tmp ?>">
-                            <input type="hidden" name="id_product" value="<?= $row->id_product ?>">
-                            <input type="number" name="quantity" class="form-control" value="<?= $row->quantity ?>">
-                            <input type="submit" name="update_submit" value="Modifier">
+                        <form method="POST" action="<?php echo current_url(); ?>" class="form_update_quantity">
+                            <input type="hidden" name="id" id="id" value="<?= $row->id ?>">
+                            <input type="hidden" name="id_tmp" id="id_tmp" value="<?= $this->session->id_tmp ?>">
+                            <input type="hidden" name="id_product" id="id_product" value="<?= $row->id_product ?>">
+                            <input type="number" name="quantity" id="quantity" class="form-control" value="<?= $row->quantity ?>">
+                            <input type="submit" name="update_submit" class="btn btn-block btn-primary update_submit" id="update_submit" value="Modifier">
                         </form>
                     </td>
                     <td>
                         <?= $row->price ?>
                     </td>
                     <td>
-                        <form method="POST">
-                            <input type="hidden" name="id_product" value="<?= $row->id_product ?>">
-                            <input type="submit" name="delete_product" value="Supprimer" class="btn btn-danger" onclick="return confirm('Voulez vous supprimer le produit ?')">
+                        <!-- SUPPRESSION D'UN PRODUIT -->
+                        <form method="POST" action="<?php echo current_url(); ?>" class="form_delete_by_product">
+                            <input type="hidden" name="id_product" value="<?= $row->id_product ?>" id="id_product">
+                            <input type="submit" name="delete_by_product" value="Supprimer" class="btn btn-danger delete_by_product" id="delete_by_product" onclick="return confirm('Voulez vous supprimer le produit ?')">
                         </form>
                     </td>
 
@@ -62,21 +63,21 @@
                     </td>
                     <td>
                         <?= $row->quantity ?>
-                        <form method="POST">
-                            <input type="hidden" name="id" value="<?= $row->id ?>">
-                            <input type="hidden" name="id_tmp" value="<?= $this->session->id_tmp ?>">
-                            <input type="hidden" name="id_product" value="<?= $row->id_product ?>">
-                            <input type="number" name="quantity" class="form-control" value="<?= $row->quantity ?>">
-                            <input type="submit" name="update_submit" value="Modifier">
+                         <form method="POST" action="<?php echo current_url(); ?>" class="form_update_quantity">
+                            <input type="hidden" name="id" id="id" value="<?= $row->id ?>">
+                            <input type="hidden" name="id_tmp" id="id_tmp" value="<?= $this->session->id_tmp ?>">
+                            <input type="hidden" name="id_product" id="id_product" value="<?= $row->id_product ?>">
+                            <input type="number" name="quantity" id="quantity" class="form-control" value="<?= $row->quantity ?>">
+                            <input type="submit" name="update_submit" class="btn btn-block btn-primary update_submit" id="update_submit" value="Modifier">
                         </form>
                     </td>
                     <td>
                         <?= $row->price ?>
                     </td>
                     <td>
-                        <form method="POST">
-                            <input type="hidden" name="id_product" value="<?= $row->id_product ?>">
-                            <input type="submit" name="delete_product" value="Supprimer" class="btn btn-danger" onclick="return confirm('Voulez vous supprimer le produit ?')">
+                        <form method="POST" action="<?php echo current_url(); ?>" class="form_delete_by_product">
+                            <input type="hidden" name="id_product" value="<?= $row->id_product ?>" id="id_product">
+                            <input type="submit" name="delete_by_product" value="Supprimer" class="btn btn-danger delete_by_product" id="delete_by_product" onclick="return confirm('Voulez vous supprimer le produit ?')">
                         </form>
                     </td>
 
@@ -85,20 +86,21 @@
                 endforeach;
             }
             ?>
+
     </tbody>
-</table>
-<p><b>Prix final, toutes taxes comprises</b></p>
-<p>
-    <?php
-    if (!empty($cart_user_l)) {
-        foreach ($ttc as $row) :
-            ?>
-            <?= $row->ttc ?>
+    <caption><b>Prix final, toutes taxes comprises</b>      
             <?php
-        endforeach;
-    }
-    ?>
-</p>
+            if (!empty($cart_user) || !empty($cart_user_l)) {
+                foreach ($ttc as $row) :
+                    ?>
+                    <?= $row->ttc ?>
+                    <?php
+                endforeach;
+            }
+            ?>
+        </caption>
+</table>
+
 <form method="POST">
     <input type="submit" name="buy_submit" value="Acheter" class="btn btn-success">
     <?php

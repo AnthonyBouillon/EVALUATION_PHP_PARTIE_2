@@ -100,17 +100,3 @@ if ($language == "fr") {
         <script src="<?= base_url('assets/js/script.js') ?>"></script>
     </body>
 </html>
-
-<script>
-// Page liste utilisateur , bouton ajouté    
-$('.form').submit(function(e) {
-    swal({
-  title: "Produit ajouté",
-  icon: "success",
-});
-    e.preventDefault();
-    var form = $(this);
-    $.post(form.attr('action'), form.serialize(), function(data) {
-    }, 'json');
-});
-</script>
