@@ -60,6 +60,7 @@ class Produit extends CI_Controller {
         if ($this->session->admin != 1) {
             header('location: ../../boutique/read_list');
         }
+
         if ($this->input->post()) {
             // Vérification de chaques champs
             $this->form_validation->set_rules('pro_cat_id', 'Libellé', 'required|min_length[1]|max_length[2]|integer|xss_clean');
@@ -97,6 +98,7 @@ class Produit extends CI_Controller {
             }
         }
 
+
         $data['title'] = 'Ajouter un produit';
         // Chemin/Nom de la page
         $data['page'] = 'admin/add_list';
@@ -119,7 +121,7 @@ class Produit extends CI_Controller {
         }
         if ($this->input->post()) {
             // Délaration des règles de validation pour les champs du formulaire
-            $this->form_validation->set_rules('pro_cat_id', 'Libellé', 'required|min_length[1]|max_length[2]|integer|xss_clean');
+            $this->form_validation->set_rules('pro_cat_id', 'Sous-catégorie', 'required|min_length[1]|max_length[2]|integer|xss_clean');
             $this->form_validation->set_rules('pro_ref', 'Référence', 'required|min_length[2]|max_length[10]|alpha_numeric_spaces|xss_clean');
             $this->form_validation->set_rules('pro_libelle', 'Libellé', 'required|min_length[2]|max_length[200]|alpha_numeric_spaces|xss_clean');
             $this->form_validation->set_rules('pro_description', 'Description', 'required|min_length[2]|max_length[1000]|xss_clean');
@@ -135,22 +137,23 @@ class Produit extends CI_Controller {
                 $data['pro_d_modif'] = date('Y-m-d H:i:s');
                 // Upload image
                 if (!empty($_FILES['pro_photo']['name'])) {
-                        $data["pro_photo"] = 'jpg';
-                        unlink(FCPATH . 'assets/image/' . $id . '.' . 'jpg');
-                        $config['upload_path'] = FCPATH . 'assets/image/';
-                        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                        $config['max_size'] = 3000;
-                        $config['max_width'] = 3000;
-                        $config['max_height'] = 3000;
-                        $config['file_name'] = $id . '.jpg';
-                        $this->upload->initialize($config);
-                        $this->upload->do_upload('pro_photo');
+                    $data["pro_photo"] = 'jpg';
+                    unlink(FCPATH . 'assets/image/' . $id . '.' . 'jpg');
+                    $config['upload_path'] = FCPATH . 'assets/image/';
+                    $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                    $config['max_size'] = 3000;
+                    $config['max_width'] = 3000;
+                    $config['max_height'] = 3000;
+                    $config['file_name'] = $id . '.jpg';
+                    $this->upload->initialize($config);
+                    $this->upload->do_upload('pro_photo');
                 }
                 // Modifie le produit
                 $this->produit_model->update_product($id, $data);
                 $this->session->set_flashdata('success', 'Bravo, le produit a été modifié');
             }
         }
+
         $data['title'] = 'Modifier un produit';
         // Nom de la page
         $data['page'] = 'admin/update_list';
@@ -159,6 +162,13 @@ class Produit extends CI_Controller {
         // Lis le produit correspondant à son identifiant
         $data['this_product'] = $this->produit_model->read_by_product($id);
         $this->load->view('templates/template', $data);
+    }
+
+    public function get_sub_category() {
+        if ($this->input->is_ajax_request()) {
+            $data = $this->produit_model->read_sub_categorie($_POST['pro_cat_id']);
+            echo json_encode($data);
+        }
     }
 
 }

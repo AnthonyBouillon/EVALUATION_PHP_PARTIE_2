@@ -1,5 +1,27 @@
 
 $(document).ready(function () {
+    //Affiche sous catégorie suivant la catégorie sélectionnée
+    function sub_category() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost/Jarditou/admin/produit/get_sub_category',
+            data: {pro_cat_id: $('#pro_cat_id').val()},
+            dataType: 'json',
+            success: function (result) {
+                $('#pro_sub_cat').html('');
+                for (var i = 0; i < result.length; i++) {
+                    $('#pro_sub_cat').append('<option value="' + result[i].cat_id + '">' + result[i].cat_nom + '</option');
+                }
+            },
+            error: function () {
+                alert('Veuillez activer javascript pour afficher les sous-catégories');
+            },
+        });
+    }
+    ;
+
+    $('#pro_cat_id').change(sub_category);
+
     /**
      * AJAX
      * AJOUT D'UN PRODUIT DANS LE PANIER

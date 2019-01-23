@@ -42,7 +42,22 @@ class Produit_model extends CI_Model {
      * @return type
      */
     public function read_categorie() {
-        $result = $this->db->get('categories')->result();
+        $this->db->select('*')
+                ->from('categories')
+                ->where('cat_parent', NULL);
+        $result = $this->db->get()->result();
+        return $result;
+    }
+    /**
+     * Lis les sous-catégories
+     * select cat_nom from categories where cat_parent = 3
+     * @return type
+     */
+    public function read_sub_categorie($id_parent) {
+        $this->db->select('*')
+                ->from('categories')
+                ->where('cat_parent', $id_parent);
+        $result = $this->db->get()->result();
         return $result;
     }
 
