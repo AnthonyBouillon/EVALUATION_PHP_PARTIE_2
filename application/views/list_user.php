@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <th><?= lang('reference') ?></th>
+            <th><?= lang('libelle') ?></th>
             <th><?= lang('description') ?></th>
             <th><?= lang('picture') ?></th>
             <th><?= lang('price') ?></th>
@@ -20,6 +21,9 @@
         <?= $row->pro_ref ?>
                     </td>
                     <td>
+        <?= $row->pro_libelle ?>
+                    </td>
+                    <td>
         <?= $row->pro_description; ?>
                     </td>
                     <td>
@@ -31,7 +35,7 @@
                     <td>
                         <!-- Ajoute un produit avec sa quantité -->
                         <form method="POST" action="<?php echo current_url(); ?>" class="form">
-                            <input type="number" class="form-control" name="quantity" value="1">
+                             <input type="hidden" class="form-control" name="quantity" value="1">
                             <input type="hidden" name="id_product" value="<?= $row->pro_id ?>">
                             <button type="submit" class="btn btn-primary btn_list" id="submit_add">Ajouter</button>
                         </form>  

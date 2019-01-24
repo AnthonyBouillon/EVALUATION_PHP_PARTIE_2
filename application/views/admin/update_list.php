@@ -14,13 +14,17 @@ if ($this->session->flashdata('success')) {
 <form method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="pro_cat_id">Catégorie</label>
-        <select class="form-control" id="pro_cat_id" name="pro_cat_id">
+        <select class="form-control" id="pro_cat_id">
             <!-- la catégorie du produit -->
             <option value="<?= $this_product->pro_cat_id ?>"><?= $this_product->cat_nom ?></option>
             <!-- Liste des catégories -->
             <?php foreach ($this_cat as $row) { ?>
                 <option value="<?= $row->cat_id ?>"><?= $row->cat_nom ?></option>
             <?php } ?>
+        </select>
+        <label for="pro_sub_cat">Sous-catégorie</label>
+        <select class="form-control" id="pro_sub_cat" name="pro_cat_id">
+      
         </select>
     </div>
     <div class="form-group">

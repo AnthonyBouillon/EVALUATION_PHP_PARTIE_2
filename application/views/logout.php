@@ -1,4 +1,7 @@
 <?php
+/**
+ * PAGE DE DECONNEXION
+ */
 // Supprime les sessions
 unset($_SESSION['username']);
 unset($_SESSION['id_user']);

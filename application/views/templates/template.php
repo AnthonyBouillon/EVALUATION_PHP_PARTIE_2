@@ -1,12 +1,12 @@
 
 <?php
-// Assigne un id unique pour les non connectés
+// Assigne un id unique pour la première visite
 if (!isset($this->session->id_tmp)) {
     $this->session->id_tmp = uniqid();
-    // Annule l'id temporaire pour les connectés
-} else if (isset($this->session->username) && !isset($this->session->id_tmp)) {
+    // ???????????????????????????????????? PROBLEME DE LOGIQUE
+} /*else if (isset($this->session->username) && !isset($this->session->id_tmp)) {
     $this->session->id_tmp = 0;
-}
+}*/
 // Récupère en tete du langage du navigateur
 $language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 // Récupère les deux premières lettres
@@ -58,10 +58,10 @@ if ($language == "fr") {
                             <?php endif; ?>
                             <!-- Public -->
                             <li class="nav-item active">
-                                <a class="nav-link" href="<?= site_url('boutique/read_list') ?>">Liste des produits (Utilisateur)</a>
+                                <a class="nav-link" href="<?= site_url('boutique/read_list') ?>">Liste des produits</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= site_url('boutique/read_cart') ?>">Panier (Utilisateur)</a>
+                                <a class="nav-link" href="<?= site_url('boutique/read_cart') ?>">Panier</a>
                             </li>
                             <!-- Si l'utilisateur n'est pas connecté -->
                             <?php if (!isset($this->session->username)) { ?>

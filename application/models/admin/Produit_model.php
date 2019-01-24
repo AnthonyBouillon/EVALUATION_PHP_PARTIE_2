@@ -1,11 +1,20 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/**
+ * Insert un produits
+ * Lis les produits (pagination)
+ * Lis un produit
+ * Lis les catégories
+ * Lis les sous-catégories
+ * Modifie un produit
+ * Supprime un produit
+ * 
+ */
 class Produit_model extends CI_Model {
 
     /**
-     * Enregistre un produit
+     * Enregistre un produit dans la base de données
      * @param type $data
      */
     public function create_product($data) {
@@ -24,7 +33,7 @@ class Produit_model extends CI_Model {
     }
 
     /**
-     * Lis un produit
+     * Lis un produit correspondant à son identifiant
      * @param type $id
      * @return type
      */
@@ -38,7 +47,7 @@ class Produit_model extends CI_Model {
     }
 
     /**
-     * Lis les catégories
+     * Lis les catégories parent
      * @return type
      */
     public function read_categorie() {
@@ -49,8 +58,7 @@ class Produit_model extends CI_Model {
         return $result;
     }
     /**
-     * Lis les sous-catégories
-     * select cat_nom from categories where cat_parent = 3
+     * Lis les sous-catégories (enfants des catégories parents)
      * @return type
      */
     public function read_sub_categorie($id_parent) {
@@ -62,7 +70,7 @@ class Produit_model extends CI_Model {
     }
 
     /**
-     * Modifie un produit
+     * Modifie un produit correspondant à son identifiant
      * @param type $id
      * @param type $data
      */
@@ -72,13 +80,14 @@ class Produit_model extends CI_Model {
     }
 
     /**
-     * Supprime un ou des produits
+     * Supprime un produit correspondant à sont identifiant
+     * Supprime l'image lié au produit
      * @param type $id
      */
     public function delete_product($id) {
         $this->db->where('pro_id', $id);
         $this->db->delete('produits');
-        // Supprime image in dossier
+        // Supprime image portant le nom de l'identifiant du produit
         $filename = FCPATH . 'assets/image/' . $id . '.' . 'jpg';
         if (file_exists($filename)) {
             unlink(FCPATH . 'assets/image/' . $id . '.' . 'jpg');

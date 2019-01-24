@@ -2,6 +2,10 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Insert un utilisateur
+ * Lis les informations de l'utilisateur
+ */
 class User_model extends CI_Model {
 
     /**
@@ -13,7 +17,7 @@ class User_model extends CI_Model {
     }
 
     /**
-     * Lis les informations de l'utilisateur grâce à sont nom d'utilisateur
+     * Lis les informations de l'utilisateur correspondant à son nom d'utilisateur
      * @param type $login
      * @return type
      */

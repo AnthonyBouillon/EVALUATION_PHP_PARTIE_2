@@ -2,6 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 $lang['reference'] = 'Reference';
+$lang['libelle'] = 'Libellé';
 $lang['description'] = 'Description';
 $lang['picture'] = 'Picture';
 $lang['price'] = 'Price';

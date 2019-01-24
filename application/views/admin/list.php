@@ -12,6 +12,7 @@ if($this->session->flashdata('succes_delete')){
             <th>Référence</th>
             <th>Libellé</th>
             <th>Description</th>
+            <th>Afficher</th>
             <th>Gestion</th>
         </tr>
     </thead>
@@ -32,6 +33,16 @@ if($this->session->flashdata('succes_delete')){
                 </td>
                 <td>
                     <?= $row->pro_description; ?>
+                </td>
+                <td>
+                    <?php
+                    if($row->pro_bloque == 1){
+                        echo 'Oui';
+                    }else{
+                        echo 'Non';
+                    }
+                    
+                    ?>
                 </td>
                 <td>
                     <a href="<?= site_url('admin/produit/update_list/' . $row->pro_id) ?>" title="Modifier" class="btn btn-primary btn_list">Modifier</a><br>
