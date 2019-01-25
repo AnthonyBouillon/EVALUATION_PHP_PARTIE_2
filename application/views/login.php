@@ -9,7 +9,7 @@
 <small class="text-success"><?= $this->session->flashdata('success') ?></small>
 <small class="text-danger"><?= $this->session->flashdata('fail') ?></small>
 <hr>
-<!-- Formulaire qui me permet d'enregistrer un nouvel utilisateur -->
+<!-- Formulaire qui permet à un utilisateur de se connecter -->
 <form acion="script_register.php" method="POST">
     <div class="">
         <div class="form-group">

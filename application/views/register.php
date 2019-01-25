@@ -5,8 +5,7 @@
 <?php if (!empty(validation_errors())) { ?>
     <?= '<div class="alert alert-danger">' . validation_errors() . '</div>' ?>
 <?php } ?>
-
-
+<!-- Message d'erreur en javascript -->
 <small class="c_red empty_field"></small><br>
 
 <form acion="script_register.php" method="POST">

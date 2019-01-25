@@ -3,6 +3,7 @@
 <table class="table table-responsive">
     <thead>
         <tr>
+            <!-- Titre du tableau différent suivant la langue du navigateur -->
             <th><?= lang('reference') ?></th>
             <th><?= lang('libelle') ?></th>
             <th><?= lang('description') ?></th>
@@ -18,19 +19,19 @@
                 ?>
                 <tr>
                     <td>
-        <?= $row->pro_ref ?>
+                        <?= $row->pro_ref ?>
                     </td>
                     <td>
-        <?= $row->pro_libelle ?>
+                        <?= $row->pro_libelle ?>
                     </td>
                     <td>
-        <?= $row->pro_description; ?>
+                        <?= $row->pro_description; ?>
                     </td>
                     <td>
                         <img class="card-img-top img-fluid" src="<?= base_url('assets/image/' . $row->pro_id . '.' . $row->pro_photo) ?>" alt="Image">
                     </td>
                     <td>
-        <?= $row->pro_prix; ?>
+                        <?= $row->pro_prix; ?>
                     </td>
                     <td>
                         <!-- Ajoute un produit avec sa quantité -->
@@ -42,7 +43,7 @@
                     </td>
                 <tr>
     <?php endforeach;
-} ?>
+        } ?>
     </tbody>
 </table>
 <!-- Lien de la pagination -->
