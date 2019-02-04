@@ -40,7 +40,7 @@ if ($language == "fr") {
             </header>
             <!-- Navigation contenant les liens des différentes pages -->
             <nav class="row navbar navbar-expand-lg">
-                <a class="navbar-brand" href="#">Jarditou</a>
+                  <a class="navbar-brand" href="#">Jarditou</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

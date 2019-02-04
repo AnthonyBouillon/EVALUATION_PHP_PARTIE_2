@@ -30,6 +30,7 @@ class Boutique extends CI_Controller {
                     // Insert son identifiant
                     $data['id_user'] = $this->session->id_user;
                 }
+
                 // Le produit est inséré
                 $this->boutique_model->create_cart($data, $this->input->post('id_product'));
             }
@@ -105,15 +106,37 @@ class Boutique extends CI_Controller {
     }
 
     /**
+     * Ajoute un produit
+     * APPEL AJAX
+     */
+    public function add_product() {
+
+        if ($this->input->is_ajax_request()) {
+            $data = array(
+                'quantity' => $this->input->post('quantity'),
+                'id_product' => $this->input->post('id_product'),
+                'id_tmp' => $this->session->id_tmp
+            );
+            $this->output->set_content_type('application/json');
+            $this->output->set_header('Access-Control-Allow-Origin: *');
+            $this->output->set_output(json_encode($this->boutique_model->create_cart($data, $this->input->post('id_product'))));
+        }
+    }
+
+    /**
      * Supprime tous les produits du panier pour les connectés et les non connectés
      * APPEL AJAX
      */
     public function delete_product() {
         if ($this->input->is_ajax_request()) {
             if (!empty($this->session->username)) {
-                $this->boutique_model->delete_cart_l($this->session->id_user);
+                $this->output->set_content_type('application/json');
+                $this->output->set_header('Access-Control-Allow-Origin: *');
+                $this->output->set_output(json_encode($this->boutique_model->delete_cart_l($this->session->id_user)));
             } else {
-                $this->boutique_model->delete_cart($this->session->id_tmp);
+                $this->output->set_content_type('application/json');
+                $this->output->set_header('Access-Control-Allow-Origin: *');
+                $this->output->set_output(json_encode($this->boutique_model->delete_cart($this->session->id_tmp)));
             }
         }
     }
@@ -124,7 +147,9 @@ class Boutique extends CI_Controller {
      */
     public function delete_by_product() {
         if ($this->input->is_ajax_request()) {
-            $this->boutique_model->delete_by_product($this->input->post('id_product'), $this->session->id_tmp, $this->session->id_user);
+            $this->output->set_content_type('application/json');
+            $this->output->set_header('Access-Control-Allow-Origin: *');
+            $this->output->set_output(json_encode($this->boutique_model->delete_by_product($this->input->post('id_product'), $this->session->id_tmp, $this->session->id_user)));
         }
     }
 
@@ -134,7 +159,9 @@ class Boutique extends CI_Controller {
      */
     public function update_product() {
         if ($this->input->is_ajax_request()) {
-            $this->boutique_model->update_cart($this->input->post('quantity'), $this->input->post('id'));
+            $this->output->set_content_type('application/json');
+            $this->output->set_header('Access-Control-Allow-Origin: *');
+            $this->output->set_output(json_encode($this->boutique_model->update_cart($this->input->post('quantity'), $this->input->post('id'))));
         }
     }
 

@@ -42,7 +42,7 @@ $(document).ready(function () {
         // La classe form
         var form = $(this);
         // Destination des données, les données, fonction =>
-        $.post(form.attr('action'), form.serialize(), function () {
+        $.post('http://localhost/Jarditou/boutique/add_product', form.serialize(), function () {
             swal({
                 title: "Produit ajouté",
                 icon: "success"
