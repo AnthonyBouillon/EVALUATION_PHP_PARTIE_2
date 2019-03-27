@@ -68,16 +68,20 @@ class User extends CI_Controller {
                 if ($result) {
                     // Si la saisie du mot de passe (form) correspond au mot de passe (bdd)
                     if (password_verify($this->input->post('u_password'), $result->u_password)) {
-                        $this->session->set_flashdata('success', 'Vous êtes connectez !');
+                        $this->session->set_flashdata('success', 'Vous êtes connecté !');
+                        $this->session->set_flashdata('fail', '');
                         // SESSION DONNEE UTILISATEUR
                         $this->session->username = $this->input->post('u_login');
                         $this->session->id_user = $result->u_id;
                         $this->session->admin = $result->admin;
+                        
                     } else {
                         $this->session->set_flashdata('fail', 'Mauvais identifiant');
+                        $this->session->set_flashdata('success', '');
                     }
                 } else {
                     $this->session->set_flashdata('fail', 'Mauvais identifiant');
+                    $this->session->set_flashdata('success', '');
                 }
             }
         }

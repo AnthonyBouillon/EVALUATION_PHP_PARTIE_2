@@ -1,4 +1,4 @@
-<h1 class="text-center">Liste des produits (partie utilisateur)</h1>
+<h1 class="text-center">Liste des produits</h1>
 <hr>
 <table class="table table-responsive">
     <thead>

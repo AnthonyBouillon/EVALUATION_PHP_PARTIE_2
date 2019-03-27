@@ -13,7 +13,7 @@
         <label for="pro_cat_id">Catégorie</label>
         <select class="form-control" id="pro_cat_id">
             <!-- la catégorie du produit -->
-            <option value="<?= $this_product->pro_cat_id ?>"><?= $this_product->cat_nom ?></option>
+           
             <!-- Liste des catégories -->
             <?php foreach ($this_cat as $row) { ?>
                 <option value="<?= $row->cat_id ?>"><?= $row->cat_nom ?></option>
@@ -22,7 +22,7 @@
         <!-- Sous-catégorie du produit affiché en ajax -->
         <label for="pro_sub_cat">Sous-catégorie</label>
         <select class="form-control" id="pro_sub_cat" name="pro_cat_id">
-      
+       <option value="<?= $this_product->pro_cat_id ?>"><?= $this_product->cat_nom ?></option>
         </select>
     </div>
     <div class="form-group">
@@ -56,12 +56,25 @@
             <p class="card-text">Si vous voulez remplacer l'image, choisissez-en une nouvelle !</p>
         </div>
         <div class="custom-file">
-            <input type="file" class="custom-file-input" id="pro_photo" name="pro_photo" required>
+            <input type="file" class="custom-file-input" id="pro_photo" name="pro_photo">
             <label class="custom-file-label" for="pro_photo">Parcourir image...</label>
         </div>
     </div>
     <hr>
+    <?php if($this_product->pro_bloque == 1){ ?>
     <!-- Bouton radio -->
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="pro_bloque" id="pro_bloque" value="0" >
+        <label class="form-check-label" for="pro_bloque">
+            Bloquer produit
+        </label><br>
+        <input class="form-check-input" type="radio" name="pro_bloque" id="pro_bloque2" value="1" checked>
+        <label class="form-check-label" for="pro_bloque2">
+            Afficher produit
+        </label>
+    </div>
+    <?php } else { ?>
+       <!-- Bouton radio -->
     <div class="form-check">
         <input class="form-check-input" type="radio" name="pro_bloque" id="pro_bloque" value="0" checked>
         <label class="form-check-label" for="pro_bloque">
@@ -72,6 +85,7 @@
             Afficher produit
         </label>
     </div>
+    <?php } ?>
     <hr>
     <button type="submit" class="btn btn-primary">Modifier</button>
 </form>

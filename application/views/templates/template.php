@@ -4,9 +4,9 @@
 if (!isset($this->session->id_tmp)) {
     $this->session->id_tmp = uniqid();
     // ???????????????????????????????????? PROBLEME DE LOGIQUE
-} /*else if (isset($this->session->username) && !isset($this->session->id_tmp)) {
-    $this->session->id_tmp = 0;
-}*/
+} /* else if (isset($this->session->username) && !isset($this->session->id_tmp)) {
+  $this->session->id_tmp = 0;
+  } */
 // Récupère en tete du langage du navigateur
 $language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 // Récupère les deux premières lettres
@@ -34,13 +34,34 @@ if ($language == "fr") {
                 <div class="col-2">
                     <img src="<?= base_url('assets/image/logo.png') ?>" alt="Logo du site" class="img-fluid logo">
                 </div>
-                <div class="col-10">
-                    <img src="<?= base_url('assets/image/banner_1.jpg') ?>" alt="Logo du site" class="img-fluid banner">
+                <div id="carouselExampleControls" class="carousel slide col-md-10" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100 img-fluid banner" src="<?= base_url('assets/image/banner_1.jpg') ?>" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 img-fluid banner" src="<?= base_url('assets/image/banner_1.jpg') ?>" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 img-fluid banner" src="<?= base_url('assets/image/banner_1.jpg') ?>" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
+
+
+
             </header>
             <!-- Navigation contenant les liens des différentes pages -->
             <nav class="row navbar navbar-expand-lg">
-                  <a class="navbar-brand" href="#">Jarditou</a>
+                <a class="navbar-brand" href="#">Jarditou</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -73,8 +94,14 @@ if ($language == "fr") {
                                 </li>
                                 <!-- Si l'utilisateur est connecté -->
                             <?php } else { ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?= site_url('boutique/read_list') ?>"><?= $this->session->username ?></a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?= $this->session->username ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Mon compte</a>
+                                        <a class="dropdown-item" href="#">Supprimer mon compte</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('user/logout') ?>">Déconnexion</a>

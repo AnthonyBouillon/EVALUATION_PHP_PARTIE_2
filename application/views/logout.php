@@ -9,4 +9,4 @@ unset($_SESSION['id_tmp']);
 unset($_SESSION['admin']);
 
 // Redirection
-header('location:' . site_url('boutique/read_list'));
+header('location:' . site_url('user/login'));

@@ -30,7 +30,6 @@ class Boutique extends CI_Controller {
                     // Insert son identifiant
                     $data['id_user'] = $this->session->id_user;
                 }
-
                 // Le produit est inséré
                 $this->boutique_model->create_cart($data, $this->input->post('id_product'));
             }
@@ -38,7 +37,7 @@ class Boutique extends CI_Controller {
 
         // Configuration de la pagination
         $config['base_url'] = base_url('boutique/read_list');
-        $config['total_rows'] = $this->db->get('produits')->num_rows();
+        $config['total_rows'] = $this->boutique_model->count_display_product();
         $config['per_page'] = 5;
         $config['next_link'] = ' >> ';
         $config['prev_link'] = ' << ';
@@ -72,7 +71,9 @@ class Boutique extends CI_Controller {
         }
         // Modifie la quantité d'un produit du panier pour les connectés ou les non connectés
         if ($this->input->post('update_submit')) {
-            $this->boutique_model->update_cart($this->input->post('quantity'), $this->input->post('id'));
+            if ($this->input->post('quantity') > 0) {
+                $this->boutique_model->update_cart($this->input->post('quantity'), $this->input->post('id'));
+            }
         }
         // Supprime un produit dans le panier pour les connectés et les non connectés
         if ($this->input->post('delete_by_product')) {
@@ -161,7 +162,9 @@ class Boutique extends CI_Controller {
         if ($this->input->is_ajax_request()) {
             $this->output->set_content_type('application/json');
             $this->output->set_header('Access-Control-Allow-Origin: *');
-            $this->output->set_output(json_encode($this->boutique_model->update_cart($this->input->post('quantity'), $this->input->post('id'))));
+            if ($this->input->post('quantity') > 0) {
+                $this->output->set_output(json_encode($this->boutique_model->update_cart($this->input->post('quantity'), $this->input->post('id'))));
+            }
         }
     }
 

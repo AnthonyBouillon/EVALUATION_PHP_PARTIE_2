@@ -1,5 +1,5 @@
 
-<h1 class="text-center">Votre panier (partie utilisateur)</h1>
+<h1 class="text-center">Votre panier</h1>
 <hr>
 <!-- Suppression de tous les produits -->
 <form method="POST" action="<?php echo current_url(); ?>" class="delete_all_cart">

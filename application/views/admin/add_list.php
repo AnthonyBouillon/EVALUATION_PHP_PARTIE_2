@@ -11,14 +11,14 @@
     <div class="form-group">
         <label for="pro_cat_id">Catégorie</label>
         <!-- Noms des catégories -->
-        <select class="form-control" id="pro_cat_id">
+        <select class="form-control" id="pro_cat_id" required>
             <?php foreach ($data_cat as $row) : ?>
                 <option value="<?= $row->cat_id ?>"><?= $row->cat_nom ?></option>
             <?php endforeach; ?>
         </select>
         <!-- Sous catégorie affiché en ajax -->
         <label for="pro_sub_cat">Sous-catégorie</label>
-        <select class="form-control" id="pro_sub_cat" name="pro_cat_id">
+        <select class="form-control" id="pro_sub_cat" name="pro_cat_id" required>
             
         </select>
     </div>

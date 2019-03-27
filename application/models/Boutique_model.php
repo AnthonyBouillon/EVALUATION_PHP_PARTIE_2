@@ -47,6 +47,10 @@ class Boutique_model extends CI_Model {
         return $result;
     }
 
+    public function count_display_product(){
+        $this->db->select('*')->from('produits')->where('pro_bloque', 1);
+        return $this->db->get()->num_rows();
+    }
     /**
      * Lis la liste de ses produits dans le panier correspondant à son identifiant temporaire
      * à condition qu'il en es un
